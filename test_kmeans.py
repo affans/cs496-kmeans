@@ -1,6 +1,6 @@
 import pytest
-from aysha_task import euclidean_distance
-from aysha_task import find_closest_centroid
+from kmeans import euclidean_distance
+from kmeans import find_closest_centroid
 
 def test_euc_empty():
     with pytest.raises(ValueError):
