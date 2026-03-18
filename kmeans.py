@@ -66,12 +66,51 @@ def find_closest_centroid(point, centroids):
 
 
 def update_centroids(data, labels, k):
-    # Priyanshu to implement
-    pass
+    #We will need Sum and Count to compute the Average. 
+    
+    Sum_Data = []
+    Count_Data = []
+    
+    #Now will initialize the Sum and Count
+    for i in range(k):
+        Sum_Data.append([0,0])
+        Count_Data.append(0)
+    
+    #Now will go over each of the data points where will indicate the cluster where data point actually belongs
+    
+    for i in range(len(data)):
+        Cluster = labels[i]
+        Point = data[i]
+        
+        #Now will do sum
+        Sum_Data[Cluster][0] += Point[0]
+        Sum_Data[Cluster][1] += Point[1]
+    
+        #Since did the sum now we will increase the count too
+        Count_Data[Cluster] += 1
+    
+    #Now since our for loop is already doing sum and increasing the count for each of the data pair, we can count the centroid by dividing sum with count.
+    Centroid = []
+    for j in range (k):
+        DataX_Avg = Sum_Data[j][0] / Count_Data[j]
+        DataY_Avg = Sum_Data[j][1] / Count_Data[j]
+        Centroid.append([DataX_Avg, DataY_Avg])
+    return Centroid
 
 def has_converged(old, new, tol):
-    # Priyanshu to implement
-    pass
+    #To go over each centroid one by one we will do for loop
+    
+    for i in range(len(old)):
+        Centroid_Old = old[i]
+        Centroid_New = new[i]
+        
+        #Since now we will have to see the actual distance between the old and new centroid adnd since Aysha has created Euclidean function we will use it
+        Distance = euclidean_distance(Centroid_Old, Centroid_New)
+        
+        #Now since we have a distance, we will compare it with tolerance level to see is it converged yet or not.
+        if Distance > tol:
+            return False
+    return True
 
 def fit(data, k):
     # Isaac to implement
