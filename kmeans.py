@@ -1,5 +1,7 @@
 import numpy as np 
 import pandas as pd
+from sklearn.datasets import make_blobs # creates the groupings (2 dim ~ Normal)
+from sklearn.preprocessing import StandardScaler # used to standardize the data
 
 def euclidean_distance(p1, p2):
     #check if somehow the sum is negative? I do not think that is even possible but just check
@@ -130,3 +132,13 @@ def fit(data, k):
         
     # Isaac to implement
     pass
+
+if __name__ == "__main__":
+    seed = 42
+    np.random.seed(seed)
+    n_clusters = 2
+    X_train, true_labels = make_blobs(n_samples=100, centers=n_clusters, cluster_std=3.5, random_state=2)
+    X_train = StandardScaler().fit_transform(X_train) # standardize the data
+    print(X_train)
+
+    fit(X_train, n_clusters)
