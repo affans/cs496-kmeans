@@ -3,6 +3,7 @@ from kmeans import euclidean_distance
 from kmeans import find_closest_centroid
 from kmeans import update_centroids
 from kmeans import has_converged
+from kmeans import fit
 
 def test_euc_empty():
     with pytest.raises(ValueError):
@@ -48,3 +49,6 @@ def test_non_numeric_old():
 def test_non_numeric_new():
     with pytest.raises(TypeError):
         has_converged([1, 'a'], [2, 'b'], 0.10)
+
+def test_fit():
+    pass

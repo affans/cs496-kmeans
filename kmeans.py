@@ -113,5 +113,20 @@ def has_converged(old, new, tol):
     return True
 
 def fit(data, k):
+    cent_indices = np.random.choice(len(data), k, replace = False)
+    centroids = [data[i] for i in cent_indices]
+    labels = [0] * len(data)
+    converged = False
+
+    while not converged:
+        for i in range(len(data)):
+            labels[i] = find_closest_centroid(data[i], centroids)
+
+        new_centroids = update_centroids(data, labels, k)
+        if has_converged(centroids, new_centroids, tol):
+            converged = True
+        
+        centroids = new_centroids
+        
     # Isaac to implement
     pass
